@@ -28,14 +28,14 @@
 
     let activityInfoMap: { [hash: number]: ActivityInfo } = {};
 
+    $: activityType = determineActivityType(
+        playerData?.currentActivity?.activityInfo?.activityModes
+    )
+
     setInterval(() => requestAnimationFrame(timerTick), 1000 / 30);
 
     function timerTick() {
-        if (
-            !determineActivityType(
-                playerData?.currentActivity?.activityInfo?.activityModes
-            )
-        ) {
+        if (!activityType) {
             return;
         }
 
@@ -115,12 +115,14 @@
         <div class="header margin">
             <div class="status">
                 {#if playerData}
-                    {#if determineActivityType(playerData.currentActivity?.activityInfo?.activityModes)}
+                    {#if activityType}
                         <h1>
                             {timeText}<span class="small grey">{msText}</span>
                         </h1>
                         <h2 class="grey">
-                            {playerData.currentActivity.activityInfo.name.toUpperCase()}
+                            <!-- taskeren edition: added the type of the activity, only supports ones in consts. -->
+                            <!-- (Raid, Dungeon, Strike, Lost Sectors for now) -->
+                            {playerData.currentActivity.activityInfo.name.toUpperCase()} ({activityType})
                         </h2>
                     {:else}
                         <h1 class="small">
@@ -129,7 +131,9 @@
                                 >#{playerData.profileInfo.displayTag}</span
                             >
                         </h1>
-                        <h2 class="grey">NOT IN ACTIVITY</h2>
+                        <!-- taskeren edition: changed the text when the activity is not supported. -->
+                        <!-- instead of showing "NOT IN ACTIVITY", we show the name of the activity and with type of "Unknown" -->
+                        <h2 class="grey">{playerData.currentActivity?.activityInfo?.name?.toUpperCase() ?? "NOT IN ACTIVITY"} (Unknown)</h2>
                     {/if}
                 {:else}
                     <h1 class="small">Error</h1>

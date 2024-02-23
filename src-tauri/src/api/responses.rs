@@ -3,7 +3,7 @@ use std::{cmp::Ordering, collections::HashMap};
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Deserializer, Serialize};
 
-use crate::consts::{RAID_ACTIVITY_HASH, RAID_ACTIVITY_MODE};
+use crate::consts::{DUNGEON_ACTIVITY_HASH, DUNGEON_ACTIVITY_MODE, RAID_ACTIVITY_HASH, RAID_ACTIVITY_MODE};
 
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -268,10 +268,24 @@ impl<'de> Deserialize<'de> for ActivityInfo {
                 v.push(RAID_ACTIVITY_MODE);
             }
 
+            // taskeren modified:
+            // added the support to detect dungeon types.
+            if hash == DUNGEON_ACTIVITY_HASH {
+                v.push(DUNGEON_ACTIVITY_MODE);
+            }
+
             v
         }
 
         let activity = _Activity::deserialize(deserializer)?;
+
+        #[cfg(debug_assertions)]
+        {
+            println!("Name = {}", activity.original_display_properties.name);
+            println!("Activity Type Hash = {}", activity.activity_type_hash);
+            println!("Activity Mode Types = {:?}", activity.activity_mode_types.clone().unwrap_or_else(|| vec![]));
+        }
+
         Ok(Self {
             name: activity.original_display_properties.name,
             activity_modes: activity

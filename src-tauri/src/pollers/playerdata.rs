@@ -179,6 +179,24 @@ impl PlayerDataPoller {
 }
 
 fn send_data_update(handle: &AppHandle, data: PlayerDataStatus) {
+
+    // for debug purpose
+    #[cfg(debug_assertions)]
+    {
+        match data.last_update {
+            None => {}
+            Some(ref player_data) => {
+                println!("{}, {}", player_data.current_activity.start_date, player_data.current_activity.activity_hash);
+                match player_data.current_activity.activity_info {
+                    None => {}
+                    Some(ref activity_info) => {
+                        println!("{}, {:?}", activity_info.name, activity_info.activity_modes)
+                    }
+                }
+            }
+        }
+    }
+
     if let Some(o) = handle.get_window("overlay") {
         o.emit("playerdata_update", data.clone()).unwrap();
     }

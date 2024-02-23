@@ -1,20 +1,22 @@
 {
-    "name": "threepole",
+    "name": "threepole-taskeren-edition",
     "private": true,
-    "version": "1.1.1",
+    "version": "1.2.0",
     "type": "module",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "tauri": "tauri"
     },
     "devDependencies": {
-        "typescript": "^4.9.5",
-        "vite": "^4.1.4",
-        "@tauri-apps/api": "^1.2.0",
-        "svelte": "^3.55.1",
         "@sveltejs/vite-plugin-svelte": "^2.0.2",
+        "@tauri-apps/api": "^1.2.0",
+        "@tauri-apps/cli": "^1.5.10",
         "@tsconfig/svelte": "^3.0.0",
-        "svelte-preprocess": "^5.0.1"
+        "svelte": "^3.55.1",
+        "svelte-preprocess": "^5.0.1",
+        "typescript": "^4.9.5",
+        "vite": "^4.1.4"
     }
 }

@@ -14,3 +14,4 @@ pub const STRIKE_ACTIVITY_MODE: usize = 18;
 pub const LOSTSECTOR_ACTIVITY_MODE: usize = 87;
 
 pub const RAID_ACTIVITY_HASH: usize = 2043403989;
+pub const DUNGEON_ACTIVITY_HASH: usize = 608898761;
