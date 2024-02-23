@@ -4,6 +4,15 @@
 
 ---
 
+## *TASKEREN EDITION*
+
+This branch of Threepole is edited by Taskeren to provide extra features and bug fixes.\
+However, I'm not good at Tauri, Svelte and Rust, which is the basement of this project. So if you find any problems, feel free to leave an issue. But I can't guarantee to fix it as I could have no idea about how to fix it.
+
+Changes from the original version:
+- Overlay timer for dungeons are now showing correctly (since v1.2.0)
+- Activity name and its type is now showing at Main Window, instead of simply "NOT IN ACTIVITY". Supported types are Raids, Dungeons, Strikes and Lost Sectors. (since v1.2.0)
+
 ## About
 
 Threepole is a clean, minimal Destiny 2 timer/tracker written in Rust and Svelte that displays stats about your current activity and clear history.
